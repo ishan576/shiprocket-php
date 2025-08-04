@@ -59,6 +59,29 @@ trait Couriers
 	}
 
     /**
+	 * generate label
+	 *
+	 * @param array $shipment_ids
+	 *
+	 * @return stdClass
+	 * @throws Exception
+	 */
+	public function getLabel(array $shipment_ids)
+	{
+		return $this->request('post', 'courier/generate/label', ['shipment_id' => $shipment_ids]);
+	}
+	
+	public function getInvoice(array $shipment_ids)
+	{
+		return $this->request('post', 'orders/print/invoice', ['ids' => $shipment_ids]);
+	}
+	
+	public function requestPickup(array $shipment_ids)
+	{
+		return $this->request('post', 'courier/generate/pickup', ['shipment_id' => $shipment_ids]);
+	}
+
+    /**
      * Makes a request to the Shiprocket API and returns the response.
      *
      * @param    string $verb       The Http verb to use
